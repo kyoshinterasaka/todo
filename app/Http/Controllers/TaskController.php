@@ -7,7 +7,7 @@ use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\EditTask;
 
 class TaskController extends Controller
 {
@@ -27,6 +27,12 @@ class TaskController extends Controller
         'current_folder_id' => $current_folder->id,
         'tasks' => $tasks,
     ]);
+
+        $current_folder = Folder::find($id);
+
+    if (is_null($current_folder)) {
+        abort(404);
+    }
     }
 
     /**
